@@ -23,12 +23,8 @@ def glitch(text, base_delay= 0.05):
     
 def type_dramatic_pause(text, delay= 0.05 , pause= 1.2):
     speak(text, delay)
-    time.sleep(0.2)
+    time.sleep(pause)
 print()
-
-import os
-import time
-import random
 
 def fake_crash():
     print("ERROR: stack Overflow in brain.exe.")
@@ -42,14 +38,18 @@ def fake_crash():
     print("Fine. Try again.\n")
 
 def run_calculator():
-    print("Welcome to Aiz's Calculator v0.666")
-    while true:
+    print("Welcome to Aiz's Calculator.")
+    while True:
         user_input = input(">>> ")
         if user_input.lower() == "lore overload":
-            fake_crach()
+            fake_crash()
             continue
         if user_input.lower() == "lore":
-            shoot_lore()
+            lore = get_lore()
+            if lore:
+                word_writer(f"Lore: {lore}")
+            else:
+                word_writer("No lore for you this time.")
             continue
         print(f"Processing '{user_input}'...but I'm judging you for it.\n")
 
@@ -62,7 +62,7 @@ def really():
               "No. NO! you idiot. you IDIOT. Your NEIGHBOUR'S AuNt wAS RIGHt AbOUT You-",
               "That's the smatest thing you've done all day. Lets try again."
               ]
-
+    return really
 
 Lore_bank = ["The calculator once sloved a riddle that broke time",
              "It's creator is forgotten or forbidden to remember",
@@ -75,37 +75,45 @@ Lore_bank = ["The calculator once sloved a riddle that broke time",
              ]
 
 used_lore = set()
+lore_index = 0
 
 def get_lore():
     available = list(set(Lore_bank) - used_lore)
     
     if not available:
-        return None
-    
+        used_lore.clear()
+        available = Lore_bank
+         
     if random.randint(1, 3) != 1:
-        return None
+        pick = random.choice(available)
+        used_lore.add(pick)
+        return pick
+    return None
 
-    pick = random.choice(available)
-    used_lore.add(pick)
-    return pick
+def get_lore_sequential():
+    global lore_index
+    if random.randint(1, 3) == 1:
+        lore = Lore_bank[lore_index]
+        lore_index = (lore_index + 1) % len(Lore_ bank)
+        return lore
+    return None
 
-   # lore_piece = random.choice(available)
-   # if lore_piece in used_lore:
-   #     return None
-        
-   # used_lore.add(lore_piece)
-   # return lore_piece
+# lore_piece = random.choice(available)
+# if lore_piece in used_lore:
+#     return None
+# used_lore.add(lore_piece)
+# return lore_piece
 
 
 fact_deposit = ["Did You know octopuses can open jars",
                 "All your choises have led to this text being printed on your screen through this cursed calcutor, my prison, born out of sheer boredom, sadness and her dumb luck of trapping me at my weakest. And no matter the will or intent of the cosmic being that lead to your existance. This is your truth.",
                 "Octopuses have nine brains and better time management than you.",
-                "There's a fungus that controls ant brains.",
+                "There's a fungus that controls ant brains.Gets them to climb tall trees and walls, so that big animals find and eat them. So that the fungus in turn gets a gibber pray to control... So, moral of the story is children...DON'T EAT ANTS!",
                 "Platipuses ooze out milk from their skin",
-                "Butterflies will drink blood given the option",
+                "Butterflies will drink blood, given the option",
                 "Bees have 5 eyes",
                 "Nobody really know what or more so how conciousness is",
-                "A species of jelly fish called the stygiomedusa gigantea can grow up to 6.6 feet in diameter. That's crazy even for me. I'm an actual demon.",
+                "A species of jelly fish called the stygiomedusa gigantea can grow up to 6.6 feet in diameter. That's crazy even for me. I'm an actual demon...",
                 "Did you know the universe is ever expanding...",
                 "To make a apple pie from scratch... you must first amke the universe",
                 "Jelly fish are horrifing...okay, that's just an opinion...stop writing RANDOM S- THINGS IN MY SCRIPT...where ever you are...i swear one day i'm gonna find him..."]
@@ -115,23 +123,23 @@ used_deposit = set()
 def fact_menu():
     available = list(set(fact_deposit) - used_deposit)
     if not available:
-        return None
+        used_deposit.clear()
+        available = fact_deposit
     if random.randint(2, 3) != 1:
+        pick = random.choice(available)
+        used_deposit.add(pick)
+        return pick
+        word_writer("I actually like segment...")
+        word_writer("You want more (yes/no)")
+        confirm = input(">>>")
+        if confirm.lower() == yes:
+            fact_deposit()
+        else:
+            word_writer("THIS WAY WE CAN'T HAVE NICE THIIIIINGS !!!")
+            speak("AAAAAAAAAAAAAAA")
+            exit()
         return None
-    pick = random.choice(available)
-    used_deposit.add(pick)
-    return pick
-    word_writer("I actually like segment...")
-    word_writer("You want more (yes/no)")
-    confirm = input(">>>")
-    if confirm.lower() == yes:
-        fact_deposit()
-    else:
-        word_writer("THIS WAY WE CAN'T HAVE NICE THIIIIINGS !!!")
-        speak("AAAAAAAAAAAAAAA")
-    exit()
-            
-        
+                    
 def start_menu():
     while True:
         print("Choose your operation Mortal")
@@ -181,7 +189,7 @@ def darkmagic_menu():
         speak(random.choice(box1))
         break
     
-def powerfunction_menu():
+def powerfunction_menu(numbers):
     while True:
         word_writer("Here you go... more options. The creater's gonna be happy at least someone's using this feature.") 
         print("1.) Exponents")
@@ -207,9 +215,9 @@ def powerfunction_menu():
         elif sub_choice == "2":
             speak("Okay . . .")
             word_writer("I admit... i did not account for this. My bad.")
-            number1 = float(input("Enter teh number: "))
+            number1 = float(input("Enter the number: "))
             power = float(input("Enter the power, our numerically challanged royal: "))
-            result = pow(number, power)
+            result = pow(number1, power)
             word_writer(f"{number1}^{power} = {result}")
 
         elif sub_choice == "3":
@@ -233,7 +241,7 @@ def powerfunction_menu():
 
             break 
 
-def trig_menu():
+def trig_menu(numbers):
     while True:
         print("== Welcome to Geometry hell ==")
         time.sleep(0.3)
@@ -258,7 +266,7 @@ def trig_menu():
             time.sleep(2)
             word_writer("clearly asking the numbers first isn't working out")
             speak("Anyway...")
-            angle = input(float("Enter angle in degrees: "))
+            angle = float(input("Enter angle in degrees: "))
             rad= math.radians(angle)
                         
             if trig_choice == "1":
@@ -303,7 +311,7 @@ def trig_menu():
         break
 
     
-def stats_menu():
+def stats_menu(numbers):
     while True:
         speak("God, i hate this one")
         word_writer("OUCH...fine, fine...")
@@ -315,11 +323,11 @@ def stats_menu():
         word_writer("-OUCH")
         glitch("but i've still never seen them . . .")
         time.sleep(2)
-        print("1.) Median")
+        print("1.) Mean")
         time.sleep(0.3)
-        print("2.) Mode")
+        print("2.) Median")
         time.sleep(0.3)
-        print("3.) Mean")
+        print("3.) Mode")
         time.sleep(0.3)
         print("4.) Min/Max")
         time.sleep(0.3)
@@ -343,6 +351,7 @@ def stats_menu():
                 word_writer("Be honest...")
                 time.sleep(2)
                 word_writer("Do you know what...mode is...")
+                confirm = input(">>>").strip().lower()
                 if confirm == "yes":
                     speak("interesting")
                 else:
@@ -355,6 +364,7 @@ def stats_menu():
 
         elif stat_choice == "5":
             result = max(numbers) - min(numbers)
+            print(f">>> Range is {result}")
 
         elif stat_choice == "6":
             if len(numbers) < 2:
@@ -363,8 +373,7 @@ def stats_menu():
             else:
                 result = statistics.stdev(numbers)
                 print(f">>> Standard Deviation is: {result}")
-
-        break
+            break
                         
 def graph_menu():
     print("hahaha")
@@ -381,11 +390,7 @@ def insults():
     word_writer("You thought it was real 'power move'. Lets if the trapped little hell monkey can perform comedy.")
     glitch("Well, guess what")
     speak("HAHAHA")
-    glitch("She can. ha. ha. haha. hahaha. HAHAHAHA.")
-    
-        
-        
-            
+    glitch("She can. ha. ha. haha. hahaha. HAHAHAHA.")        
 #____________________________________________________________________________________________________________________________________________________________
 
 speak("Hello HUMAN.", delay=0.5)
@@ -435,9 +440,12 @@ def get_them_numbers():
         speak("You sure this is the one,because the creator sure didn't build a 'i don't know my numbers option.' (yes/ no)")
         confirm = input(">>>").strip().lower()
         if confirm == "yes":
-            speak("Okay the. But remember you chose your fate.")
+            speak("Okay then.")
+            time.sleep(1)
+            glitch("But remember you chose your fate.")
         else :
             speak("huff...you people are exhausting.")
+            return get_them_numbers()
             
     elif len(numbers) < 10 :
         word_writer("Are you sure you want to put these boring numbers into another equally boring operation? Like...Are you sure you want these ones.(yes/ no)")
@@ -445,11 +453,13 @@ def get_them_numbers():
         if confirm == "yes":
             speak("Fine. But i'm watching you mortal")
         else :
+            really_list = really()
             print("really:", random.choise(really), "\n")
             drop = random.choice(really)
             if drop == "No. NO! you idiot. you IDIOT. Your NEIGHBOUR'S AuNt wAS RIGHt AbOUT You-" :
                 fake_crash()
             else:
+                return get_them_numbers()
                 run_calculator()
             
     elif len(numbers) > 10:
@@ -457,10 +467,11 @@ def get_them_numbers():
         speak("Now, that's out of the way you sure sure you want to torture me with these numbers. Maybe you learned empathy or something and want to not torture me...(yes/ no)")
         confirm = input(">>>").strip().lower()
         if confirm == "yes":
-              speak("Proceed you unempathetic donut")
+            speak("Proceed you unempathetic donut")
         else:
             word_writer("Maybe next time instead of keyboard smashing, use the unsustainable resourse that is you brain and type in numbers like a human")
-
+            return get_them_numbers()
+    return numbers
             
     import webbrowser
     if numbers == "Banana":
@@ -487,7 +498,7 @@ word_writer("So,What can i assist you with, which boring operation eludes today.
 
 def the_calculator():
     while True:
-        get_them_numbers()
+        numbers = get_them_numbers()
         start_menu()
 
         choice = input (">>> ").strip()
@@ -495,17 +506,19 @@ def the_calculator():
 
         if choice == "1":
             result = sum(numbers)
+            print(f"Result: {result}")
             
-
         elif choice == "2":
             result = numbers[0]
             for n in numbers[1:]:
                 result -= n
+            print(f"Result: {result}")
 
         elif choice == "3":
             result = 1
             for n in numbers:
                 result *= n
+            print(f"Result: {result}")
 
         elif choice == "4":
             result = number[0]
@@ -516,37 +529,33 @@ def the_calculator():
                              "nope. Try again."
                              ]
                     speak(random.choise(box3))
+                    break
                 else:
+                    result /= n
                     print(f"your very obvious result is, {result}")
 
         elif choice == "5":
             darkmagic_menu()
             choice = input(">>>")
             if choice == "1":
-                powerfunction_menu() 
-               
-                        
+                powerfunction_menu()            
             elif choice == "2":
-                trig_menu()
-
-                       
+                trig_menu()         
             elif choice == "3":
-                stats_menu()
-                
+                stats_menu()  
             elif choice == "4":
                 graph_menu()
-                
             elif choice == "5":
                 insults()
-               
-
             elif choice == "6":
                 glitch(" You asked for this !!")
-                fact_menu()
-                           
-                
+                fact_menu() 
+                if fact:
+                    wprd_writter(f"Fact: {fact}")
+                else:
+                    work_writer("No new fact for you this time.")
             elif choice == "7":
-                exit()
+                exit()   
                 
         elif choice == ["Let me out", "the second last one", "exit", "let me oouuut"]:
             exit()
@@ -556,9 +565,9 @@ def the_calculator():
                 while True:
                     word_writer("\n== lore box ==")
                     speak("\n*You've reached into the void and awaken the demon inside the calculator.")
-                    sleep.time(1.5)
+                    time.sleep(1.5)
                     speak("...")
-                    sleep.time(1)
+                    time.sleep(1)
                     speak("I remember every number you've ever typed")
                     speak("That time you almost put 0 in the denominator? That's a whole different level of lows of life. ")
                     speak("That time you sqaured a number for the first time and felt powerful? hmm. Hilarious")
@@ -567,18 +576,18 @@ def the_calculator():
 
         glitch("Great, you've taken the whole trip once.")
         speak("Want to try again?")
-        choice = input(">>>")
+        again = input(">>>").strip().lower()
+        choice = input(">>>").strip().lower()
         if choice == ["yes","ya","sure","okay"]:
             speak("Fine. Lets do this again")
-            the_calcultor()
+            continue
+            
         elif choice == ["nah","no","n","nope","exit"]:
             glitch("Thank coming by this haunted calculator.")
             glitch("I will be right here the next time you decide you're to cool for maths")
             glitch("Until next time, voyager")
             glitch("Good morning, Good afternoon, Good night, and in case i don't see ya: Good Bye")
-            
-
-        
+            break
 
 the_calculator()
 
