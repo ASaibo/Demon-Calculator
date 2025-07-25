@@ -98,13 +98,6 @@ def get_lore_sequential():
         return lore
     return None
 
-# lore_piece = random.choice(available)
-# if lore_piece in used_lore:
-#     return None
-# used_lore.add(lore_piece)
-# return lore_piece
-
-
 fact_deposit = ["Did You know octopuses can open jars",
                 "All your choises have led to this text being printed on your screen through this cursed calcutor, my prison, born out of sheer boredom, sadness and her dumb luck of trapping me at my weakest. And no matter the will or intent of the cosmic being that lead to your existance. This is your truth.",
                 "Octopuses have nine brains and better time management than you.",
@@ -434,8 +427,13 @@ word_writer("and let's see what breaks",delay= 0.5)
 import random
 def get_them_numbers():
     numbers = list(map(float, input("Enter the Numbers, seperated by a space: ").split()))
-
     speak("Next step: confirming that these are the golden numbers because trust issues")
+    type_, value = parse_iput(numbers)
+    if type_ == "numbers":
+        print("You entered a number:", value)
+    elif type_ == "text":
+        print("You entered text:", value)
+
     if len(numbers) == 1 :
         speak("You sure this is the one,because the creator sure didn't build a 'i don't know my numbers option.' (yes/ no)")
         confirm = input(">>>").strip().lower()
@@ -480,7 +478,7 @@ def get_them_numbers():
         speak("What is that human saying...you reap what you sow...")
         time.sleep(1.5)
 
-        webbrowser.open("https://www.youtubr.com/watch?v=1v_u5YfE6eg")
+        webbrowser.open("https://www.youtube.com/watch?v=1v_u5YfE6eg")
 
         speak("You may return when you've had enough. I'll wait.")
         time.sleep(10)
