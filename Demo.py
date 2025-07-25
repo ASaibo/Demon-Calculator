@@ -1,4 +1,4 @@
-import sys, time, random, math, os, statistics
+import sys, time, random, math, os, statistics, webbrowser
 
 def speak(text, delay= 0.1, pause= 0.2):
     for char in text:
@@ -422,7 +422,12 @@ speak("Gimme your presious numbers")
 time.sleep(0.5)
 word_writer("and let's see what breaks",delay= 0.5)
 
-
+def parse_input(user_input):
+    try:
+        value = float(user_input)
+        return("numbers", value)
+    except ValueError:
+        return ("text", user_input)
 
 import random
 def get_them_numbers():
@@ -471,7 +476,6 @@ def get_them_numbers():
             return get_them_numbers()
     return numbers
             
-    import webbrowser
     if numbers == "Banana":
         speak("No. You typed Banana. You know what.")
         time.sleep(1)
@@ -526,7 +530,7 @@ def the_calculator():
                     box3 = [ "Oh you tragic fool...I weep for your brain",
                              "nope. Try again."
                              ]
-                    speak(random.choise(box3))
+                    speak(random.choice(box3))
                     break
                 else:
                     result /= n
@@ -555,7 +559,7 @@ def the_calculator():
             elif choice == "7":
                 exit()   
                 
-        elif choice == ["Let me out", "the second last one", "exit", "let me oouuut"]:
+        elif choice in ["Let me out", "the second last one", "exit", "let me oouuut"]:
             exit()
 
         elif choice == "99":
@@ -580,7 +584,7 @@ def the_calculator():
             speak("Fine. Lets do this again")
             continue
             
-        elif choice == ["nah","no","n","nope","exit"]:
+        elif choice in ["nah","no","n","nope","exit"]:
             glitch("Thank coming by this haunted calculator.")
             glitch("I will be right here the next time you decide you're to cool for maths")
             glitch("Until next time, voyager")
