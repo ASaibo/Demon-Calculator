@@ -93,7 +93,7 @@ def get_lore():
 def get_lore_sequential():
     global lore_index
     if random.randint(1, 3) == 1:
-        lore = Lore_bank[lore_index]
+        lore = Lore_bank{lore_index}
         lore_index = (lore_index + 1) % len(Lore_ bank)
         return lore
     return None
@@ -195,7 +195,7 @@ def powerfunction_menu(numbers):
         time.sleep(0.3)
         print("5.) Under root/ Square root")
         time.sleep(0.5)
-        sub_choise= input(">>>")
+        sub_choice= input(">>>")
 
         if sub_choice == "1":
             speak("Okay . . .")
@@ -263,7 +263,7 @@ def trig_menu(numbers):
             rad= math.radians(angle)
                         
             if trig_choice == "1":
-                print(f"sin({angle}) = {maths.sin(rad)}")
+                print(f"sin({angle}) = {math.sin(rad)}")
 
             elif trig_choice == "2":
                 print(f"cos({angle}) = {math.cos(rad)}")
@@ -523,7 +523,7 @@ def the_calculator():
             print(f"Result: {result}")
 
         elif choice == "4":
-            result = number[0]
+            result = numbers[0]
             for n in numbers[1:]:
                 if n == 0:
                     print("Division by Zero? oh you tragic fool")
@@ -552,8 +552,8 @@ def the_calculator():
             elif choice == "6":
                 glitch(" You asked for this !!")
                 fact_menu() 
-                if fact:
-                    wprd_writter(f"Fact: {fact}")
+                if fact_menu:
+                    word_writer(f"Fact: {fact_menu()}")
                 else:
                     work_writer("No new fact for you this time.")
             elif choice == "7":
