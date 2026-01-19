@@ -24,7 +24,6 @@ def glitch(text, base_delay= 0.05):
 def type_dramatic_pause(text, delay= 0.05 , pause= 1.2):
     speak(text, delay)
     time.sleep(pause)
-print()
 
 def fake_crash():
     print("ERROR: stack Overflow in brain.exe.")
@@ -121,17 +120,16 @@ def fact_menu():
     if random.randint(2, 3) != 1:
         pick = random.choice(available)
         used_deposit.add(pick)
-        return pick
         word_writer("I actually like segment...")
         word_writer("You want more (yes/no)")
         confirm = input(">>>")
-        if confirm.lower() == yes:
-            fact_deposit()
+        if confirm.lower() == "yes":
+            fact_menu()
         else:
             word_writer("THIS WAY WE CAN'T HAVE NICE THIIIIINGS !!!")
             speak("AAAAAAAAAAAAAAA")
             exit()
-        return None
+    return None
                     
 def start_menu():
     while True:
@@ -457,8 +455,8 @@ def get_them_numbers():
             speak("Fine. But i'm watching you mortal")
         else :
             really_list = really()
-            print("really:", random.choise(really), "\n")
-            drop = random.choice(really)
+            print("really:", random.choise(really_list), "\n")
+            drop = random.choice(really_list)
             if drop == "No. NO! you idiot. you IDIOT. Your NEIGHBOUR'S AuNt wAS RIGHt AbOUT You-" :
                 fake_crash()
             else:
@@ -504,8 +502,7 @@ def the_calculator():
         start_menu()
 
         choice = input (">>> ").strip()
-        import numbers
-
+        
         if choice == "1":
             result = sum(numbers)
             print(f"Result: {result}")
@@ -540,11 +537,11 @@ def the_calculator():
             darkmagic_menu()
             choice = input(">>>")
             if choice == "1":
-                powerfunction_menu()            
+                powerfunction_menu(numbers)            
             elif choice == "2":
-                trig_menu()         
+                trig_menu(numbers)         
             elif choice == "3":
-                stats_menu()  
+                stats_menu(numbers)  
             elif choice == "4":
                 graph_menu()
             elif choice == "5":
@@ -580,7 +577,7 @@ def the_calculator():
         speak("Want to try again?")
         again = input(">>>").strip().lower()
         choice = input(">>>").strip().lower()
-        if choice == ["yes","ya","sure","okay"]:
+        if choice in ["yes","ya","sure","okay"]:
             speak("Fine. Lets do this again")
             continue
             
