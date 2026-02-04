@@ -1,4 +1,4 @@
-import sys, time, random, math, os, statistics, webbrowser
+import sys, time, random, math, os, statistics, webbrowser, numbers
 
 def speak(text, delay= 0.1, pause= 0.2):
     for char in text:
@@ -210,7 +210,8 @@ def powerfunction_menu(numbers):
             power = float(input("Enter the power, our numerically challanged royal: "))
             result = pow(number1, power)
             word_writer(f"{number1}^{power} = {result}")
-
+            break
+            
         elif sub_choice == "3":
             print(f"{numbers}^2 = {numbers ** 2}")
 
@@ -389,7 +390,7 @@ time.sleep(1.8)
 word_writer("What is your Name?", delay=0.1)
 
 user_name= input("> ")
-if user_name == "Aiz":
+if user_name in ["Aiz", "aiz", "aIz", "aiZ", "AIZ"]:
     speak("Ah, Aiz you're back. But, you're not the same as you were before. You were a lot more muchier. You've lost your muchness Aiz. Some thing's missing.")
 else:
     word_writer("oh,how...")
@@ -457,7 +458,7 @@ def get_them_numbers():
             really_list = really()
             print("really:", random.choise(really_list), "\n")
             drop = random.choice(really_list)
-            if drop == "No. NO! you idiot. you IDIOT. Your NEIGHBOUR'S AuNt wAS RIGHt AbOUT You-" :
+            if drop == "No. NO! you idiot. you IDIOT. Your mOtHEr wAS RIGHt AbOUT You-" :
                 fake_crash()
             else:
                 return get_them_numbers()
